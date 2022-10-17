@@ -1,0 +1,77 @@
+Here we are just simply keeping the in time  and out time and with the help of it and a simple formula we are getting our ans...
+Time complexity is O(n)
+
+
+this approach is best explained in priyansh agarwal's vid of trees
+
+#include <bits/stdc++.h>
+using namespace std;
+#define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define ll long long
+#define int long long
+#define double long double   
+#define endl "\n"
+ 
+int gcd(int a , int b)
+{
+    if(b==0) return a;
+    return gcd(b,(a%b));
+}
+int lcm(int a, int b)
+{
+    
+   return ((a*b)/gcd(a,b));
+}
+int cnt=1;
+void dfs(int i,vector<vector<int>>&v,vector<pair<int,int>>&p,int par)
+{
+    p[i].first=cnt;
+    cnt++;
+    //cout<<i<<endl;
+    for(auto it:v[i])
+    {
+        if(it!=par)
+            dfs(it,v,p,i);
+    }
+    p[i].second=cnt;
+     cnt++;
+    //cout<<i<<" "<<p[i].first<<" "<<p[i].second<<endl;
+}
+void solver()
+{
+    int n;
+    cin>>n;
+    vector<vector<int>>v(n);
+    for(int i=1;i<n;i++)
+    {
+        int a;
+        cin>>a;
+        //cout<<a<<endl;
+        v[i].push_back(a-1);
+        v[a-1].push_back(i);
+    }
+    vector<pair<int,int>>p(n);
+    dfs(0,v,p,-1); 
+ 
+    for(auto it:p)
+    {
+        cout<<(it.second-it.first-1)/2<<" ";
+    }   
+    cout<<endl;
+}
+signed main()
+{
+    fastIO;
+#ifndef ONLINE_JUDGE
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+#endif 
+    int t=1;
+    //cin>>t;
+    while(t--)
+    {
+        solver();
+    }  
+    return 0;
+}
+ 
