@@ -1,0 +1,70 @@
+It is a very intutive methord, its simply just adding 1 to my all the possible nodes.
+
+#include <bits/stdc++.h>
+using namespace std;
+#define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define ll long long
+#define int long long
+#define double long double   
+#define endl "\n"
+ 
+int gcd(int a , int b)
+{
+    if(b==0) return a;
+    return gcd(b,(a%b));
+}
+int lcm(int a, int b)
+{
+    
+   return ((a*b)/gcd(a,b));
+}
+int dfs(int i,vector<vector<int>>&v,vector<int>&p,int par)
+{
+    
+    int l=0;
+    for(auto it:v[i])
+    {
+        if(it!=par)
+            l+=1+dfs(it,v,p,i);
+    }
+    p[i]=l;
+    return l;
+    
+}
+void solver()
+{
+    int n;
+    cin>>n;
+    vector<vector<int>>v(n);
+    for(int i=1;i<n;i++)
+    {
+        int a;
+        cin>>a;
+        v[i].push_back(a-1);
+        v[a-1].push_back(i);
+    }
+    vector<int>p(n,0);
+    dfs(0,v,p,-1); 
+ 
+    for(auto it:p)
+    {
+        cout<<it<<" ";
+    }   
+    cout<<endl;
+}
+signed main()
+{
+    fastIO;
+#ifndef ONLINE_JUDGE
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+#endif 
+    int t=1;
+    //cin>>t;
+    while(t--)
+    {
+        solver();
+    }  
+    return 0;
+}
+ 
