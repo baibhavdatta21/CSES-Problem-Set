@@ -1,5 +1,6 @@
 Here we are just simply keeping the in time  and out time and with the help of it and a simple formula we are getting our ans...
 Time complexity is O(n)
+Space Complexity is O(N*N) adj list && O(N) vector pair for storing the intime and outtime of every node.
 
 
 this approach is best explained in priyansh agarwal's vid of trees
